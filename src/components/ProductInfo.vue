@@ -10,7 +10,7 @@
             </p>
         </div>
 
-        <div class="d-flex align-items-center gap-2 mt-3 mb-0">
+        <div class="d-flex  align-items-center gap-2 mt-3 mb-0">
             <p class="mb-0">
                 Rate: {{ currentProduct.rating }}
             </p>
