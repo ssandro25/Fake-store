@@ -1,0 +1,19 @@
+{
+  "GE": {
+    "main" : "მთავარი",
+    "about_us" : "ჩვენს შესახებ",
+    "cart" : "კალათა",
+    "view_product" : "პროდუქტის ნახვა",
+    "add_to_cart" : "კალათაში დამატება",
+    "empty_cart" : "კალათა ცარიელია"
+  },
+
+  "EN": {
+    "main" : "Main",
+    "about_us" : "About us",
+    "cart" : "Cart",
+    "view_product" : "View product",
+    "add_to_cart" : "Add to cart",
+    "empty_cart" : "Cart is empty"
+  }
+}
