@@ -2,17 +2,17 @@
     <div class="border rounded text-white p-3">
         <div class="d-flex align-items-center justify-content-between">
             <p class="mb-0">
-                Price: {{ currentProduct.price }} $
+                {{ $t('price') }}: {{ currentProduct.price }} $
             </p>
 
             <p class="fs14 text-success mb-0">
-                In stock: {{ currentProduct.stock }}
+                {{ $t('in_stock') }}: {{ currentProduct.stock }}
             </p>
         </div>
 
-        <div class="d-flex  align-items-center gap-2 mt-3 mb-0">
+        <div class="d-flex align-items-center gap-2 mt-3 mb-0">
             <p class="mb-0">
-                Rate: {{ currentProduct.rating }}
+                {{ $t('rate') }}: {{ currentProduct.rating }}
             </p>
 
             <CheckRating :current-product="currentProduct"/>
@@ -32,17 +32,18 @@
             >
 
             <button type="button"
-                    class="btn btn-sm btn-outline-light w-100"
+                    class="btn btn-sm btn-outline-light w-100 text-truncate"
                     :disabled="addedToCart || productCount > currentProduct.stock || productCount === 0"
                     @click="addToCart()"
             >
                 <span v-if="!addedToCart">
                     <i class="fa-solid fa-cart-shopping me-1"></i>
-                    Add to basket
+                    {{ $t('add_to_cart') }}
                 </span>
 
                 <span v-if="addedToCart">
-                    <i class="fa-solid fa-check"></i> Added
+                    <i class="fa-solid fa-check"></i>
+                    {{ $t('added') }}
                 </span>
             </button>
         </div>

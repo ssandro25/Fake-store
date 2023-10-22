@@ -8,6 +8,12 @@
         </div>
 
         <div class="offcanvas-body bg-dark">
+            <p v-if="!getCartProducts.length"
+                class="text-white"
+            >
+                {{ $t('empty_cart') }}...
+            </p>
+
             <div v-for="product in getCartProducts" :key="product.id" class="row m-0">
                 <div class="col-3 px-0">
                     <img :alt="product.title"

@@ -2,7 +2,7 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    lang: localStorage.getItem('currentLang') ? localStorage.getItem('currentLang') : 'GE',
+    lang: localStorage.getItem('currentLang') ? localStorage.getItem('currentLang') : 'EN',
     productList: [],
     searchProducts: [],
     cartProducts: [],

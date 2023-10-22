@@ -2,7 +2,7 @@
     <header class="container-fluid px-0 border-bottom sticky-lg-top">
         <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
             <div class="container">
-                <a class="navbar-brand" href="#">Amazon</a>
+                <a class="navbar-brand" href="#">Fake Market</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
                         aria-label="Toggle navigation">
