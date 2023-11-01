@@ -55,11 +55,19 @@ export default {
         this.getProducts()
     },
 
+    watch: {
+        getProductList() {
+            console.log(this.getProductList)
+            // this.getProductList.filter(product => product.title.includes(this.getSearchQuery))
+        }
+    },
+
     computed: {
         ...mapGetters([
             'getProductList',
-            'getSearchProducts'
-        ])
+            'getSearchProducts',
+            'getSearchQuery'
+        ]),
     }
 }
 </script>
