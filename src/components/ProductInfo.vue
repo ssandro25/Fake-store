@@ -49,7 +49,7 @@
         </div>
 
         <p v-if="productCount > currentProduct.stock" class="d-block text-danger fs-12 mt-1">
-            Not enough product in stock
+            {{ $t('not_enough_product') }}
         </p>
     </div>
 </template>

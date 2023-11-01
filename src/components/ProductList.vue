@@ -1,6 +1,6 @@
 <template>
-   <div class="row row-cols-lg-4 row-cols-md-2 row-cols-1 gy-3">
-       <div v-for="product in getProductList" :key="product.id" class="col">
+   <div v-if="filteredData.length" class="row row-cols-lg-4 row-cols-md-2 row-cols-1 gy-3">
+       <div v-for="product in filteredData" :key="product.id" class="col">
            <div class="product border rounded overflow-hidden">
                 <div class="product__img">
                     <router-link :to="'/product/'+product.id">
@@ -31,6 +31,12 @@
            </div>
        </div>
    </div>
+
+    <div v-else>
+        <p class="text-white text-center fs-4 mb-0">
+            {{ $t('product_not_found') }}...
+        </p>
+    </div>
 </template>
 
 <script>
@@ -55,20 +61,17 @@ export default {
         this.getProducts()
     },
 
-    watch: {
-        getProductList() {
-            console.log(this.getProductList)
-            // this.getProductList.filter(product => product.title.includes(this.getSearchQuery))
-        }
-    },
-
     computed: {
         ...mapGetters([
             'getProductList',
-            'getSearchProducts',
+            'getSearchQuery',
             'getSearchQuery'
         ]),
-    }
+
+        filteredData() {
+            return this.getProductList.filter(product => product.title.toLowerCase().includes(this.getSearchQuery) || product.description.toLowerCase().includes(this.getSearchQuery))
+        }
+    },
 }
 </script>
 

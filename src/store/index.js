@@ -4,17 +4,15 @@ export default createStore({
   state: {
     lang: localStorage.getItem('currentLang') ? localStorage.getItem('currentLang') : 'EN',
     productList: [],
-    searchProducts: [],
-    searchQuery: '',
     cartProducts: [],
+    searchQuery: '',
   },
 
   getters: {
     getLang: state => state.lang,
     getProductList: state => state.productList,
-    getSearchQuery: state => state.searchQuery,
-    getSearchProducts: state => state.searchProducts,
     getCartProducts: state => state.cartProducts,
+    getSearchQuery: state => state.searchQuery,
   },
 
   mutations: {
@@ -29,23 +27,13 @@ export default createStore({
       state.productList = products
     },
 
-    // setSearchProducts({state}, word) {
-    //   [...state.getProductList].filter(product => product.title.toLowerCase().includes(word.toLowerCase()))
-    // }
-
-    // setSearchProducts({ state }, searchQuery) {
-    //   // state.searchProducts = state.productList.filter(product => {
-    //   //   return product.title.toLowerCase().includes(searchQuery.toLowerCase());
-    //   // });
-    //   state.productList = state.productList.filter(product => {
-    //     return product.title.toLowerCase().includes(searchQuery.toLowerCase());
-    //   });
-    // },
-
-
     setCartProducts({state}, product) {
       state.cartProducts.push(product)
     },
+
+    setSearchQuery({state}, word) {
+      state.searchQuery = word
+    }
   },
 
   modules: {

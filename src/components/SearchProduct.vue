@@ -1,37 +1,30 @@
 <template>
     <div class="mb-3">
-        <input v-model="getSearchQuery"
+        <input v-model="search"
                type="text"
                class="form-control form-control-lg"
-               placeholder="Enter product name"
+               :placeholder="$t('enter_product_name_or_description')"
                @input="searchProduct"
         >
     </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 
 export default {
     name: "SearchProduct",
 
-    // data() {
-    //     return {
-    //         search: ''
-    //     }
-    // },
-    //
-    // methods: {
-    //     searchProduct() {
-    //         this.$store.dispatch('setSearchProducts', this.search)
-    //     }
-    // },
+    data() {
+        return {
+            search: ''
+        }
+    },
 
-    computed: {
-        ...mapGetters([
-            'getSearchQuery'
-        ])
-    }
+    methods: {
+        searchProduct() {
+            this.$store.dispatch('setSearchQuery', this.search)
+        }
+    },
 }
 </script>
 
