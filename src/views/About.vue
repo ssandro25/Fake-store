@@ -1,6 +1,6 @@
 <template>
-    <div>
-        ABOUT PAGE
+    <div class="text-white">
+        ABOUT PAGE second test
     </div>
 </template>
 
