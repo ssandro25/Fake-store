@@ -11,10 +11,17 @@
         <img :src="enIcon" width="20" alt="">
     </button>
 
-    <button class="btn btn-outline-light cart__btn" type="button" data-bs-toggle="offcanvas"
-            data-bs-target="#cart" aria-controls="cart">
+    <button class="btn btn-outline-light position-relative cart__btn"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#cart" aria-controls="cart"
+    >
         <i class="fa-solid fa-cart-shopping"></i>
         <span class="d-none d-md-inline ms-2">{{ $t('cart') }}</span>
+
+        <span v-if="cart.length" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+            {{ cart.length }}
+        </span>
     </button>
 </template>
 
@@ -33,7 +40,8 @@ export default {
 
     computed: {
         ...mapGetters({
-            lang: 'getLang'
+            lang: 'getLang',
+            cart: 'getCartProducts'
         })
     },
 

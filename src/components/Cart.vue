@@ -1,5 +1,5 @@
 <template>
-    <div class="offcanvas offcanvas-end border-start" data-bs-scroll="true" data-bs-backdrop="false"
+    <div class="offcanvas offcanvas-start border-end" data-bs-scroll="true" data-bs-backdrop="false"
          tabindex="-1" id="cart" aria-labelledby="cartLabel">
         <div class="offcanvas-header bg-dark border-bottom">
             <h5 class="offcanvas-title text-white" id="cartLabel">{{ $t('cart') }}</h5>
@@ -34,7 +34,7 @@
                                 class="btn p-0 border-0 lh-1 remove__product"
                                 @click="removeFromCart(product.id)"
                         >
-                            <i class="fa-solid fa-xmark fs-14 text-secondary"></i>
+                            <i class="fa-solid fa-trash fs-14 text-secondary"></i>
                         </button>
                     </div>
 
@@ -52,12 +52,18 @@
                         </div>
 
                         <div class="d-flex align-items-center border rounded">
-                            <button class="btn btn-sm border-0"
+                            <button class="btn btn-sm border-0 p-0 change_count__btn"
                                     type="button"
-                                    @click="product.productCount --"
-                                    :disabled="product.productCount <= 0"
                             >
-                                <i class="fa-solid fa-minus text-white"></i>
+                                <i v-if="product.productCount > 1"
+                                   class="fa-solid fa-minus text-white w-100 h-100 d-flex align-items-center justify-content-center"
+                                   @click="product.productCount --"
+                                ></i>
+
+                                <i v-if="product.productCount === 1"
+                                   class="fa-solid fa-xmark text-danger w-100 h-100 d-flex align-items-center justify-content-center"
+                                   @click="removeFromCart(product.id)"
+                                ></i>
                             </button>
 
                             <input v-model="product.productCount"
@@ -65,7 +71,7 @@
                                    type="number"
                             >
 
-                            <button class="btn btn-sm border-0"
+                            <button class="btn btn-sm border-0 p-0 change_count__btn"
                                     type="button"
                                     @click="product.productCount ++"
                                     :disabled="product.productCount >= product.stock"
@@ -121,9 +127,9 @@ export default {
     background-color: #dcc9c9;
 }
 
-.cart_count__input {
+.cart_count__input,
+.change_count__btn {
     width: 40px;
     height: 35px;
 }
-
 </style>

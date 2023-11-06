@@ -4,7 +4,7 @@ export default createStore({
   state: {
     lang: localStorage.getItem('currentLang') ? localStorage.getItem('currentLang') : 'EN',
     productList: [],
-    cartProducts: [],
+    cartProducts: localStorage.getItem('cartProducts') ? JSON.parse(localStorage.getItem('cartProducts')) : [] ,
     searchQuery: '',
   },
 
@@ -28,12 +28,14 @@ export default createStore({
     },
 
     setCartProducts({state}, product) {
-      state.cartProducts.push(product)
+      state.cartProducts.push(product);
+
+      localStorage.setItem('cartProducts', JSON.stringify(state.cartProducts))
     },
 
     setSearchQuery({state}, word) {
       state.searchQuery = word
-    }
+    },
   },
 
   modules: {
