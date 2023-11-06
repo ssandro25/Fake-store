@@ -17,7 +17,7 @@
             <span class="visually-hidden">Next</span>
         </button>
 
-        <div class="carousel-indicators position-static">
+        <div class="carousel-indicators position-static overflow-auto mx-0">
             <button v-for="(image, index) in currentProduct.images"
                     :key="index"
                     type="button"

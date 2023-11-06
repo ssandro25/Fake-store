@@ -9,7 +9,7 @@
                 <ProductTitles :current-product="currentProduct"/>
             </div>
 
-           <div class="col-lg-3">
+           <div class="col-lg-3 mt-lg-0 mt-3">
                 <ProductInfo :current-product="currentProduct"/>
            </div>
        </div>
