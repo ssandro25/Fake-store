@@ -14,7 +14,8 @@
     <button class="btn btn-outline-light position-relative cart__btn"
             type="button"
             data-bs-toggle="offcanvas"
-            data-bs-target="#cart" aria-controls="cart"
+            data-bs-target="#cart"
+            aria-controls="cart"
     >
         <i class="fa-solid fa-cart-shopping"></i>
         <span class="d-none d-md-inline ms-2">{{ $t('cart') }}</span>

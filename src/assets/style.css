@@ -4,6 +4,9 @@
 .fs-14 {
     font-size: 14px;
 }
+.cursor-pointer {
+    cursor: pointer;
+}
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;

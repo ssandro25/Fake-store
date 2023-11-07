@@ -19,14 +19,13 @@
         </div>
 
         <div class="d-flex align-items-center gap-2 mt-3">
-            <input type="number"
-                   :readonly="addedToCart"
+            <input v-if="!addedToCart"
                    v-model="productCount"
+                   type="number"
                    class="form-control form-control-sm text-white"
                    :class="{
                        'bg-black' : productCount <= currentProduct.stock && !addedToCart,
-                       'bg-danger': productCount > currentProduct.stock,
-                       'bg-secondary' : addedToCart
+                       'bg-danger': productCount > currentProduct.stock
                    }
                  "
             >
@@ -47,6 +46,14 @@
                 </span>
             </button>
         </div>
+
+        <span v-if="addedToCart"
+              class="d-block fs-14 text-center mt-2 cursor-pointer text-decoration-underline"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#cart"
+              aria-controls="cart">
+                        კალათის გახსნა
+        </span>
 
         <p v-if="productCount > currentProduct.stock" class="d-block text-danger fs-12 mt-1">
             {{ $t('not_enough_product') }}
@@ -87,19 +94,24 @@ export default {
         },
 
         checkAddedToCart() {
-            if(this.getCartProducts.find(product => product.id === this.currentProduct.id)) {
-                this.addedToCart = true
+            if(this.getCartProducts && this.getCartProducts.length > 0) {
+                let cartProductID = this.getCartProducts.find(product => product.id).id;
+                let currentProductID = parseInt(this.$route.params.productID)
+
+                if( cartProductID === currentProductID) {
+                    this.addedToCart = true
+                } else {
+                    this.addedToCart = false
+                }
             }
         }
     },
 
-    watch: {
-        addedToCart() {
-            if(this.getCartProducts.find(product => product.id === this.currentProduct.id)) {
-                this.addedToCart = true
-            }
-        }
-    },
+    // watch: {
+    //     getCartProducts() {
+    //         this.checkAddedToCart()
+    //     }
+    // },
 
     mounted() {
         this.checkAddedToCart()
