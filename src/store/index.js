@@ -1,4 +1,4 @@
-import { createStore } from 'vuex'
+import {createStore} from 'vuex'
 
 export default createStore({
   state: {
@@ -29,6 +29,27 @@ export default createStore({
 
     setCartProducts({state}, product) {
       state.cartProducts.push(product);
+
+      localStorage.setItem('cartProducts', JSON.stringify(state.cartProducts))
+    },
+
+    updateCartProductCount({state}, data) {
+      let id = data.productID
+      let count = data.productCount
+
+      state.cartProducts = state.cartProducts.map(product => {
+        if(product.id === id) {
+          product.productCount = count
+        }
+
+        return product
+      })
+
+      localStorage.setItem('cartProducts', JSON.stringify(state.cartProducts))
+    },
+
+    removeCartProduct({state}, productID) {
+      state.cartProducts = state.cartProducts.splice(state.cartProducts.findIndex((e) => parseInt(e.id) === productID), 1)
 
       localStorage.setItem('cartProducts', JSON.stringify(state.cartProducts))
     },

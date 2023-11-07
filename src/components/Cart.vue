@@ -57,7 +57,7 @@
                             >
                                 <i v-if="product.productCount > 1"
                                    class="fa-solid fa-minus text-white w-100 h-100 d-flex align-items-center justify-content-center"
-                                   @click="product.productCount --"
+                                   @click="decreaseQuantity(product.id)"
                                 ></i>
 
                                 <i v-if="product.productCount === 1"
@@ -69,11 +69,12 @@
                             <input v-model="product.productCount"
                                    class="form-control text-center p-2 border-start border-end border-0 rounded-0 bg-dark text-white cart_count__input"
                                    type="number"
+                                   readonly
                             >
 
                             <button class="btn btn-sm border-0 p-0 change_count__btn"
                                     type="button"
-                                    @click="product.productCount ++"
+                                    @click="increaseQuantity(product.id)"
                                     :disabled="product.productCount >= product.stock"
                             >
                                 <i class="fa-solid fa-plus text-white"></i>
@@ -81,6 +82,9 @@
                         </div>
                     </div>
                 </div>
+<!--                <p v-if="product.productCount >= product.stock" class="d-block text-danger fs-12 mt-1">-->
+<!--                    {{ $t('not_enough_product') }}-->
+<!--                </p>-->
             </div>
         </div>
     </div>
@@ -100,6 +104,32 @@ export default {
     methods: {
         removeFromCart(productID) {
             this.getCartProducts.splice(this.getCartProducts.findIndex((e) => parseInt(e.id) === productID), 1)
+
+            this.$store.dispatch('removeCartProduct', productID)
+        },
+
+        decreaseQuantity(productID) {
+            let product = this.getCartProducts.find(product => product.id === productID)
+            product.productCount--
+
+            let data = {
+                'productID' : productID,
+                'productCount' : product.productCount
+            }
+
+            this.$store.dispatch('updateCartProductCount', data)
+        },
+
+        increaseQuantity(productID) {
+            let product = this.getCartProducts.find(product => product.id === productID)
+            product.productCount++
+
+            let data = {
+                'productID' : productID,
+                'productCount' : product.productCount
+            }
+
+            this.$store.dispatch('updateCartProductCount', data)
         }
     },
 
