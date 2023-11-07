@@ -56,6 +56,7 @@
 
 <script>
 import CheckRating from "@/components/CheckRating.vue";
+import {mapGetters} from "vuex";
 
 export default {
     name: "ProductInfo",
@@ -83,7 +84,31 @@ export default {
             this.currentProduct.productCount = this.productCount
 
             this.$store.dispatch('setCartProducts', this.currentProduct)
+        },
+
+        checkAddedToCart() {
+            if(this.getCartProducts.find(product => product.id === this.currentProduct.id)) {
+                this.addedToCart = true
+            }
         }
+    },
+
+    watch: {
+        addedToCart() {
+            if(this.getCartProducts.find(product => product.id === this.currentProduct.id)) {
+                this.addedToCart = true
+            }
+        }
+    },
+
+    mounted() {
+        this.checkAddedToCart()
+    },
+
+    computed: {
+        ...mapGetters([
+            'getCartProducts'
+        ])
     }
 }
 </script>
