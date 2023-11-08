@@ -6,6 +6,7 @@ export default createStore({
     productList: [],
     cartProducts: localStorage.getItem('cartProducts') ? JSON.parse(localStorage.getItem('cartProducts')) : [] ,
     searchQuery: '',
+    addedToCart: false
   },
 
   getters: {
@@ -13,6 +14,7 @@ export default createStore({
     getProductList: state => state.productList,
     getCartProducts: state => state.cartProducts,
     getSearchQuery: state => state.searchQuery,
+    getAddedToCart: state => state.addedToCart,
   },
 
   mutations: {
@@ -57,6 +59,10 @@ export default createStore({
     setSearchQuery({state}, word) {
       state.searchQuery = word
     },
+
+    checkAddedToCart({state}, check) {
+      state.addedToCart = check
+    }
   },
 
   modules: {

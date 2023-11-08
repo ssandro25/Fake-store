@@ -19,12 +19,12 @@
         </div>
 
         <div class="d-flex align-items-center gap-2 mt-3">
-            <input v-if="!addedToCart"
+            <input v-if="!getAddedToCart"
                    v-model="productCount"
                    type="number"
                    class="form-control form-control-sm text-white"
                    :class="{
-                       'bg-black' : productCount <= currentProduct.stock && !addedToCart,
+                       'bg-black' : productCount <= currentProduct.stock && !getAddedToCart,
                        'bg-danger': productCount > currentProduct.stock
                    }
                  "
@@ -32,22 +32,22 @@
 
             <button type="button"
                     class="btn btn-sm btn-outline-light w-100 text-truncate"
-                    :disabled="addedToCart || productCount > currentProduct.stock || productCount === 0"
+                    :disabled="getAddedToCart || productCount > currentProduct.stock || productCount === 0"
                     @click="addToCart()"
             >
-                <span v-if="!addedToCart">
+                <span v-if="!getAddedToCart">
                     <i class="fa-solid fa-cart-shopping me-1"></i>
                     {{ $t('add_to_cart') }}
                 </span>
 
-                <span v-if="addedToCart">
+                <span v-if="getAddedToCart">
                     <i class="fa-solid fa-check"></i>
                     {{ $t('added') }}
                 </span>
             </button>
         </div>
 
-        <span v-if="addedToCart"
+        <span v-if="getAddedToCart"
               class="d-block fs-14 text-center mt-2 cursor-pointer text-decoration-underline"
               data-bs-toggle="offcanvas"
               data-bs-target="#cart"
@@ -79,18 +79,17 @@ export default {
     data() {
         return {
             productCount: 0,
-            addedToCart: false,
         }
     },
 
     methods: {
         addToCart() {
-            this.addedToCart = true
-
             // eslint-disable-next-line vue/no-mutating-props
             this.currentProduct.productCount = this.productCount
 
             this.$store.dispatch('setCartProducts', this.currentProduct)
+
+            this.$store.dispatch('checkAddedToCart', true)
         },
 
         checkAddedToCart() {
@@ -99,9 +98,9 @@ export default {
                 let currentProductID = parseInt(this.$route.params.productID)
 
                 if( cartProductID === currentProductID) {
-                    this.addedToCart = true
+                    this.$store.dispatch('checkAddedToCart', true)
                 } else {
-                    this.addedToCart = false
+                    this.$store.dispatch('checkAddedToCart', false)
                 }
             }
         }
@@ -119,7 +118,8 @@ export default {
 
     computed: {
         ...mapGetters([
-            'getCartProducts'
+            'getCartProducts',
+            'getAddedToCart'
         ])
     }
 }

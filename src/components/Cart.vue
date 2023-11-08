@@ -106,6 +106,8 @@ export default {
             this.getCartProducts.splice(this.getCartProducts.findIndex((e) => parseInt(e.id) === productID), 1)
 
             this.$store.dispatch('removeCartProduct', productID)
+
+            this.$store.dispatch('checkAddedToCart', false)
         },
 
         decreaseQuantity(productID) {
