@@ -1,6 +1,10 @@
 <template>
-    <div class="offcanvas offcanvas-start border-end" data-bs-scroll="true" data-bs-backdrop="false"
-         tabindex="-1" id="cart" aria-labelledby="cartLabel">
+    <div class="offcanvas offcanvas-start border-end"
+         data-bs-scroll="true"
+         data-bs-backdrop="false"
+         tabindex="-1"
+         id="cart"
+         aria-labelledby="cartLabel">
         <div class="offcanvas-header bg-dark border-bottom">
             <h5 class="offcanvas-title text-white" id="cartLabel">{{ $t('cart') }}</h5>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
@@ -16,19 +20,21 @@
 
             <div v-for="product in getCartProducts" :key="product.id" class="row m-0">
                 <div class="col-3 px-0">
-                    <img :alt="product.title"
-                         :src="product.thumbnail"
-                         class="w-100"
-                         height="73"
-                         title="product.title"
-                    >
+                    <router-link :to="'/product/'+product.id" class="d-block">
+                        <img :alt="product.title"
+                             :src="product.thumbnail"
+                             class="w-100"
+                             height="73"
+                             title="product.title"
+                        >
+                    </router-link>
                 </div>
 
                 <div class="col-9 pe-0">
                     <div class="d-flex justify-content-between">
-                        <p class="text-white fw-bold mb-0">
+                        <router-link :to="'/product/'+product.id" class="cart_product__title text-decoration-none text-white fw-bold d-block">
                             {{ product.title }}
-                        </p>
+                        </router-link>
 
                         <button type="button"
                                 class="btn p-0 border-0 lh-1 remove__product"
@@ -156,12 +162,16 @@ export default {
 }
 
 .remove__product:hover {
-    background-color: #dcc9c9;
+    background-color: #eaeaea;
 }
 
 .cart_count__input,
 .change_count__btn {
     width: 40px;
     height: 35px;
+}
+.cart_product__title:hover {
+    text-decoration: underline !important;
+    opacity: .85;
 }
 </style>

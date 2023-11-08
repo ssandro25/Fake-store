@@ -23,7 +23,7 @@
                    </p>
 
                    <div class="mt-3">
-                       <router-link :to="'/product/'+product.id" type="button" class="btn btn-sm btn-outline-light w-100">
+                       <router-link :to="'/product/'+product.id"  class="btn btn-sm btn-outline-light w-100">
                            {{ $t('view_product') }}
                        </router-link>
                    </div>
@@ -52,6 +52,7 @@ export default {
             api.getProductsList().then(response => {
                 if(response.data) {
                     this.$store.dispatch('setProductList', response.data.products)
+                    this.$store.dispatch('setDataLoaded', true)
                 }
             })
         }

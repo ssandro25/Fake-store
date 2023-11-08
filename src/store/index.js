@@ -6,7 +6,7 @@ export default createStore({
     productList: [],
     cartProducts: localStorage.getItem('cartProducts') ? JSON.parse(localStorage.getItem('cartProducts')) : [] ,
     searchQuery: '',
-    addedToCart: false
+    addedToCart: false,
   },
 
   getters: {
