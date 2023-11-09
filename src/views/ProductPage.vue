@@ -38,10 +38,23 @@ export default {
         }
     },
 
+    methods: {
+        getCurrentProduct(productID) {
+            api.getProductView(productID).then(response => {
+                this.currentProduct = response.data
+            })
+        }
+    },
+
+    watch: {
+        '$route'(e) {
+            this.getCurrentProduct(e.params.productID) // თუ იგივე გვერდზე ვარ და მხოლოდ და მხოლოდ როუტი განიცდის ცვლილებას
+            // თავიდან /product/:id (პროდუქტის ნახვის გვერდი) არ არის mounted, ხოლო როცა უკვე mounted არის, საჭიროა watch-ით ვუყუროთ მაგ route-ს ცვლილებას
+        }
+    },
+
     mounted() {
-        api.getProductView(this.$route.params.productID).then(response => {
-            this.currentProduct = response.data
-        })
+       this.getCurrentProduct(this.$route.params.productID) // თუ სხვა გვერდიდან გადმოვედი ამ გვერდზე გაეშვება mounted
     }
 }
 </script>

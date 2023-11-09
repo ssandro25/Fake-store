@@ -62,6 +62,7 @@ import LogoWeb from "@/assets/images/tz-logo-1.png"
 import LogoMob from "@/assets/images/tz-logo-2.png"
 import HeaderButtons from "@/components/HeaderButtons.vue";
 
+
 export default {
     name: 'v-header',
 
@@ -76,6 +77,12 @@ export default {
             LogoMob
         }
     },
+    watch:{
+        '$route'(){
+            let element = document.getElementsByClassName('btn-close')[0];
+            element.click()
+        }
+    }
 }
 </script>
 
